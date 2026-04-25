@@ -1,0 +1,48 @@
+{
+  "expo": {
+    "name": "Operator OS",
+    "slug": "operator-os-mobapp",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#0f1720"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.operatoros.app"
+    },
+    "android": {
+      "package": "com.operatoros.app",
+      "versionCode": 1,
+      "permissions": [
+        "INTERNET"
+      ],
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#0f1720"
+      },
+      "edgeToEdgeEnabled": true,
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-secure-store",
+      [
+        "@react-native-google-signin/google-signin"
+      ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "42371b31-9f2c-4e73-8e41-9926319c8daa"
+      }
+    },
+    "owner": "busyaprime"
+  }
+}

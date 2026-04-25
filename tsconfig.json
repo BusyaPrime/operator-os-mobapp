@@ -1,0 +1,15 @@
+{
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    "strict": true,
+    "baseUrl": ".",
+    "paths": {
+      "@operator-os/contracts": ["./src/contracts"],
+      "@operator-os/contracts/*": ["./src/contracts/*"],
+      "@operator-os/config": ["./src/config"],
+      "@operator-os/config/*": ["./src/config/*"]
+    }
+  },
+  "include": ["App.tsx", "index.ts", "src/**/*.ts", "src/**/*.tsx"],
+  "exclude": ["node_modules", "dist", ".expo"]
+}
