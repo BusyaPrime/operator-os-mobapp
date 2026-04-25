@@ -7,14 +7,21 @@ import {
   View
 } from 'react-native';
 
-import { parseMobileEnv } from '@operator-os/config';
-
 import { googleSignIn } from '../../auth/google-signin';
 import { colors, radii, spacing, typography } from '../../theme/tokens';
 
 import { useSignInHandlers } from './use-sign-in-handlers';
 
-const env = parseMobileEnv(process.env as Record<string, string | undefined>);
+// Direct `process.env.EXPO_PUBLIC_*` access so Metro inlines the
+// literal value at build time. Going through `parseMobileEnv(process.env)`
+// (i.e. spreading the whole `process.env` object) defeats Metro's
+// static replacement — Metro only inlines `process.env.NAME_HERE`
+// access patterns it can analyse. The Phase 3.4 first APK shipped
+// with these undefined because of that.
+const RAW_WEB_CLIENT_ID =
+  process.env.EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID ?? '';
+const RAW_IOS_CLIENT_ID =
+  process.env.EXPO_PUBLIC_GOOGLE_IOS_CLIENT_ID ?? '';
 
 /**
  * Entry screen for unauthenticated users. All flow logic lives
@@ -29,8 +36,10 @@ export function SignInScreen() {
   const { onPressSignIn, combinedError, isBusy } = useSignInHandlers();
   const [configured, setConfigured] = useState(googleSignIn.isConfigured());
 
-  const webClientId = env.EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID;
-  const iosClientId = env.EXPO_PUBLIC_GOOGLE_IOS_CLIENT_ID;
+  const webClientId =
+    RAW_WEB_CLIENT_ID.length > 0 ? RAW_WEB_CLIENT_ID : undefined;
+  const iosClientId =
+    RAW_IOS_CLIENT_ID.length > 0 ? RAW_IOS_CLIENT_ID : undefined;
 
   useEffect(() => {
     if (configured || webClientId === undefined) return;
