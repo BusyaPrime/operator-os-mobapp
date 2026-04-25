@@ -57,3 +57,6 @@ Thumbs.db
 # IDE
 .vscode/
 .idea/
+
+# Local diagnostics scratch (logcat captures, JWTs, etc.)
+.tmp/
